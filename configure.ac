@@ -32,6 +32,12 @@ AC_CHECK_FUNCS([atexit getcwd memset sqrt strchr])
 #check for GLU
 AX_CHECK_GLU
 
+AC_PATH_PROG(SDL_CONFIG, sdl-config)
+CPPFLAGS="$CPPFLAGS `sdl-config --cflags`"
+CFLAGS="$CFLAGS `sdl-config --cflags`"
+LDFLAGS="$LDFLAGS `sdl-config --libs`"
+
+
 AC_CHECK_LIB([SDL], [main],, AC_MSG_ERROR(SDL is required. Please see README))
 AC_CHECK_LIB([SDL_image], [main],, AC_MSG_ERROR(SDL_image is required. Please see README))
 AC_CHECK_LIB([pcre], [main],, AC_MSG_ERROR(pcre is required. Please see README))
@@ -47,6 +53,7 @@ CPPFLAGS="$CPPFLAGS $FT2_CFLAGS"
 AC_CHECK_HEADER([FTGL/ftgl.h],, AC_MSG_ERROR(FTGL/ftgl.h is required. Please see README))
 
 # Check for SDL, SDL_Image, FTGL, pcre headers
+AC_CHECK_PROG([SDLCONFIG],[sdl-config],[yes])
 
 AC_CHECK_HEADER([SDL/SDL.h],, AC_MSG_ERROR(SDL/SDL.h is required. Please see README))
 AC_CHECK_HEADER([SDL/SDL_opengl.h],, AC_MSG_ERROR(SDL/SDL_opengl.h is required. Please see README))
